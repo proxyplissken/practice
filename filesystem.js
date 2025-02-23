@@ -1,5 +1,10 @@
 
 
+const FileType = Object.freeze({
+    folder: 'folder',
+    file: 'file',
+})
+
 class FileSystem {
     constructor() {
         this.root = new Folder('');
@@ -10,7 +15,7 @@ class FileSystem {
         let temp = this.root;
         for(let i=0; i<subPaths.length; i++){
             const subPath = subPaths[i];
-            if(temp.getType() === 'folder') {
+            if(temp.getType() === FileType.folder) {
                 temp = temp.read(subPath);
             } else {
                 throw new TypeError('File or Folder not found: ' + subPath);
@@ -25,7 +30,7 @@ class FileSystem {
         let temp = this.root;
         for(let i=0; i<subPaths.length; i++){
             const subPath = subPaths[i];
-            if(temp.getType() === 'folder') {
+            if(temp.getType() === FileType.folder) {
                 temp = temp.read(subPath);
             } else {
                 throw new TypeError('Folder not found: ' + subPath);
@@ -60,7 +65,7 @@ class FileSystemObject {
 
 class File extends FileSystemObject {
     constructor(name, content) {
-        super(name, 'file');
+        super(name, FileType.file);
         this.content = content;
     }
 
@@ -71,7 +76,7 @@ class File extends FileSystemObject {
 
 class Folder extends FileSystemObject {
     constructor(name) {
-        super(name, 'folder');
+        super(name, FileType.folder);
         this.contents = new Map();
     }
 
