@@ -30,7 +30,7 @@ function findClosestDistance(grid) {
     // could do in place, but create separate grid for solution
     const answerGrid = new Array(grid.length);
     for(let i=0; i<answerGrid.length; i++){
-        answerGrid[i] = new Array(grid[0].length).fill('-');
+        answerGrid[i] = new Array(grid[0].length).fill(undefined);
     }
 
     const queue = [];
@@ -39,7 +39,7 @@ function findClosestDistance(grid) {
 
     const isValid = (candidate) => {
         const inGrid = candidate.i >= 0 && candidate.i < grid.length && candidate.j >= 0 && candidate.j < grid[0].length;
-        return inGrid && grid[candidate.i][candidate.j] !== 'X' && answerGrid[candidate.i][candidate.j] === '-';   
+        return inGrid && grid[candidate.i][candidate.j] !== 'X' && answerGrid[candidate.i][candidate.j] == null;   
     } 
 
     while(queue.length > 0){
