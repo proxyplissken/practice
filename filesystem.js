@@ -21,9 +21,10 @@ class FileSystem {
     }
 
     save(path, systemObject) {
+        let subPaths = this.parsePath(path);
         let temp = this.root;
-        for(let i=0; i< systemObject.getType() === 'file' ? path.length - 1 : path.length; i++){
-            const subPath = path[i];
+        for(let i=0; i<subPaths.length; i++){
+            const subPath = subPaths[i];
             if(temp.getType() === 'folder') {
                 temp = temp.read(subPath);
             } else {
@@ -35,6 +36,9 @@ class FileSystem {
     }
 
     parsePath(path) {
+        if(path === ''){
+            return [];
+        }
         return path.split('/');
     }
 }
@@ -80,28 +84,13 @@ class Folder extends FileSystemObject {
     }
 }
 
-
-function createFile(name, content) {
-    return new File(name, content);
-}
-
-function createFolder(name) {
-    return new Folder(name);
-}
-
-function write(path, systemObject) {
-
-}
-
-function read(path) {
-
-}
-
 const file = new File('test.txt', 'testing');
-
-console.log(file);
-
+const folder = new Folder('notes');
 const fileSystem = new FileSystem();
-fileSystem.save('', file);
-const fromDisk = fileSystem.read('test.txt');
+console.log(fileSystem);
+fileSystem.save('', folder);
+console.log(fileSystem);
+fileSystem.save('notes', file);
+console.log(fileSystem);
+const fromDisk = fileSystem.read('notes/test.txt');
 console.log(fromDisk);
