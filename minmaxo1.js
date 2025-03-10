@@ -127,8 +127,23 @@ testObject.put('testing');
 testObject.put('testing');
 testObject.put('testing');
 testObject.put('bar');
+testObject.remove('bar');
+testObject.remove('bar');
+testObject.remove('bar');
+testObject.put('testing');
 
-console.log(testObject.root);
+console.log(testObject.root.val);
+console.log(testObject.root.next.val);
+console.log(testObject.root.next.next.val);
+console.log(testObject.root.next.next.next.val);
 
+console.log('-------------')
+
+console.log(testObject.root.val);
+console.log(testObject.root.prev.val);
+console.log(testObject.root.prev.prev.val);
+console.log(testObject.root.prev.prev.prev.val);
+
+console.log('-------------')
 console.log(testObject.getMin());
 console.log(testObject.getMax());
