@@ -102,3 +102,9 @@ console.log(fromDisk);
 fromDisk.amend('changed');
 fileSystem.save('notes', file);
 console.log(fileSystem.read('notes/test.txt'));
+
+const test = ['a', 'b'];
+
+for(letter of test){
+    console.log(letter);
+}
